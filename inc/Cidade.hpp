@@ -1,22 +1,24 @@
 #ifndef CIDADE_HPP
 #define CIDADE_HPP
 
-#include <iostream> 
-#include <string> 
-#include <vector> 
-
 #include "Estruturas.hpp"
+
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 class Cidade {
-private: 
+private:
     int id;
-    string nome; 
-    vector <Arestas> vizinhos; 
+    string nome;
+    vector <Arestas> vizinhos;
 public: 
-    Cidade();
     Cidade(int id, string nome);
+    int getId();
+    string getNome();
+    void imprimeDados();
 };
 
-#endif 
+#endif

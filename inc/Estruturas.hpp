@@ -1,15 +1,15 @@
 #ifndef ESTRUTURAS_HPP
 #define ESTRUTURAS_HPP
 
-typedef struct Arestas{
+typedef struct Arestas {
     int destino;
     int peso;
-};
+}Arestas;
 
-typedef struct Distacia {
-    int origem; 
-    int destino; 
-    int valor; 
-}; 
+typedef struct Distancia {
+    int origem;
+    int destino;
+    int valor;
+}Distancia;
 
-#endif 
+#endif

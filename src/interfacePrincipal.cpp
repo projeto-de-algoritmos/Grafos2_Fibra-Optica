@@ -37,8 +37,8 @@ void InterfacePrincipal::menuCidades() {
 
 void InterfacePrincipal::menuAnalise() {
     while(true) {
-        cout << "(1) Calcular menor custo total de instalação" << endl; //MST
-        cout << "(2) Calcular custo de manutenção" << endl; //Dijkstra
+        cout << "(1) Calcular custo total para instalação" << endl; //MST
+        cout << "(2) Calcular manutenção" << endl; //Dijkstra
         cout << "(0) Voltar" << endl;
         int opcao;
         cin >> opcao;

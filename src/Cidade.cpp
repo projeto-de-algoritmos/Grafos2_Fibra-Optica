@@ -13,4 +13,6 @@ int Cidade::getId(){
 string Cidade::getNome(){
     return nome; 
 }
-void imprimeDados();
+void Cidade::imprimeDados(){
+    cout << nome << endl;
+}

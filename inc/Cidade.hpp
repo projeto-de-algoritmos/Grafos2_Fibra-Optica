@@ -17,9 +17,6 @@ private:
 public: 
     Cidade();
     Cidade(int id, string nome);
-    int getId();
-    string getNome();
-    void imprimeDados();
 };
 
 #endif 

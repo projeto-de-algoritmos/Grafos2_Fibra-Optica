@@ -14,6 +14,9 @@ public:
     void conectar(string a, string b, int custo);
     void novoVertice(string nome);
     void imprimirCidades();
+    void prim();
+    int custoMinimo(vector <int> &custos, vector <bool> &visitados);
+    void copiarGrafo(Grafo &grafo);
 };
 
 #endif

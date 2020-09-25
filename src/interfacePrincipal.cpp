@@ -83,5 +83,9 @@ void InterfacePrincipal::menuAnalise() {
         cout << "(2) Calcular manutenção" << endl; //Dijkstra
         cout << "(0) Voltar" << endl;
         int opcao = getInt("");
+        if(opcao == 1)
+            grafo.prim();
+        else
+            return;
     }
 }

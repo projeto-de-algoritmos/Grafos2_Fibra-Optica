@@ -20,3 +20,10 @@ void Cidade::imprimeDados() {
 vector <Aresta> Cidade::getArestas() {
     return vizinhos;
 }
+
+void Cidade::novoVizinho(int id, int peso) {
+    Aresta aresta;
+    aresta.destino = id;
+    aresta.peso = peso;
+    vizinhos.push_back(aresta);
+}

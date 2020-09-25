@@ -4,10 +4,6 @@
 
 using namespace std;
 
-void InterfacePrincipal::start() {
-    menuPrincipal();
-}
-
 string getString(string mensagem) {
     string entrada;
     cout << mensagem;
@@ -38,8 +34,7 @@ void InterfacePrincipal::menuPrincipal() {
         cout << "(1) Gerenciamento de cidades" << endl;
         cout << "(2) Menu de análise" << endl;
         cout << "(0) Finalizar o programa" << endl;
-        int opcao;
-        cin >> opcao;
+        int opcao = getInt("");
         if(opcao == 1)
             menuCidades();
         else if(opcao == 2)
@@ -60,6 +55,8 @@ void InterfacePrincipal::menuCidades() {
         int opcao = getInt("");
         if(opcao == 1)
             cadastroCidade();
+        else if(opcao == 2)
+            conectarCidades();
         else if(opcao == 4)
             grafo.imprimirCidades();
         else
@@ -72,13 +69,19 @@ void InterfacePrincipal::cadastroCidade() {
     grafo.novoVertice(nome);
 }
 
+void InterfacePrincipal::conectarCidades() {
+    string cidade1 = getString("Nome da cidade 1: ");
+    string cidade2 = getString("Nome da cidade 2: ");
+    int custo = getInt("Distância entre as cidades: ");
+    grafo.conectar(cidade1, cidade2, custo);
+}
+
 void InterfacePrincipal::menuAnalise() {
     while(true) {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
         cout << "(2) Calcular manutenção" << endl; //Dijkstra
         cout << "(0) Voltar" << endl;
-        int opcao;
-        cin >> opcao;
+        int opcao = getInt("");
     }
 }

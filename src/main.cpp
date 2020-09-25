@@ -2,6 +2,6 @@
 
 int main() {
     InterfacePrincipal interfacePrincipal;
-    interfacePrincipal.start();
+    interfacePrincipal.menuPrincipal();
     return 0;
 }

@@ -20,6 +20,7 @@ public:
     string getNome();
     void imprimeDados();
     vector <Aresta> getArestas();
+    void novoVizinho(int id, int peso);
 };
 
 #endif

@@ -7,11 +7,11 @@ class InterfacePrincipal {
 private:
     Grafo grafo;
 public:
-    void start();
     void menuPrincipal();
     void menuCidades();
     void menuAnalise();
     void cadastroCidade();
+    void conectarCidades();
 };
 
 #endif

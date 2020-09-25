@@ -4,12 +4,37 @@
 
 using namespace std;
 
-InterfacePrincipal::InterfacePrincipal() {
+void InterfacePrincipal::start() {
     menuPrincipal();
+}
+
+string getString(string mensagem) {
+    string entrada;
+    cout << mensagem;
+    getline(cin, entrada);
+    return entrada;
+}
+
+int getInt(string mensagem) {
+    int entrada;
+    bool loop = true;
+    while(loop) {
+        cout << mensagem;
+        loop = false;
+        cin >> entrada; 
+        if(cin.fail()) {
+            cin.clear();
+            cout << "Entrada inválida." << endl;
+            loop = true;
+        }
+        cin.ignore(32767, '\n');
+    }
+    return entrada;
 }
 
 void InterfacePrincipal::menuPrincipal() {
     while(true) {
+        cout << endl;
         cout << "(1) Gerenciamento de cidades" << endl;
         cout << "(2) Menu de análise" << endl;
         cout << "(0) Finalizar o programa" << endl;
@@ -26,17 +51,30 @@ void InterfacePrincipal::menuPrincipal() {
 
 void InterfacePrincipal::menuCidades() {
     while(true) {
+        cout << endl;
         cout << "(1) Cadastrar cidade" << endl;
         cout << "(2) Conectar cidades" << endl;
         cout << "(3) Desconectar cidades" << endl;
+        cout << "(4) Ver cidades" << endl;
         cout << "(0) Voltar" << endl;
-        int opcao;
-        cin >> opcao;
+        int opcao = getInt("");
+        if(opcao == 1)
+            cadastroCidade();
+        else if(opcao == 4)
+            grafo.imprimirCidades();
+        else
+            return;
     }
+}
+
+void InterfacePrincipal::cadastroCidade() {
+    string nome = getString("Nome da cidade: ");
+    grafo.novoVertice(nome);
 }
 
 void InterfacePrincipal::menuAnalise() {
     while(true) {
+        cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
         cout << "(2) Calcular manutenção" << endl; //Dijkstra
         cout << "(0) Voltar" << endl;

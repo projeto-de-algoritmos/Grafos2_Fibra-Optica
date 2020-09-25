@@ -13,12 +13,13 @@ class Cidade {
 private:
     int id;
     string nome;
-    vector <Arestas> vizinhos;
+    vector <Aresta> vizinhos;
 public: 
     Cidade(int id, string nome);
     int getId();
     string getNome();
     void imprimeDados();
+    vector <Aresta> getArestas();
 };
 
 #endif

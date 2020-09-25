@@ -1,7 +1,7 @@
 #ifndef ESTRUTURAS_HPP
 #define ESTRUTURAS_HPP
 
-typedef struct Arestas {
+typedef struct Aresta {
     int destino;
     int peso;
 }Arestas;

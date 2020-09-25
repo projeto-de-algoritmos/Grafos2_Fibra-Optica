@@ -2,6 +2,7 @@
 #define GRAFO_HPP
 
 #include "Cidade.hpp"
+#include "Estruturas.hpp"
 
 #include <iostream>
 #include <vector>
@@ -11,6 +12,8 @@ private:
     vector <Cidade> cidades;
 public:
     void conectar(string a, string b, int custo);
+    void novoVertice(string nome);
+    void imprimirCidades();
 };
 
 #endif

@@ -16,3 +16,7 @@ string Cidade::getNome() {
 void Cidade::imprimeDados() {
     cout << nome << endl;
 }
+
+vector <Aresta> Cidade::getArestas() {
+    return vizinhos;
+}

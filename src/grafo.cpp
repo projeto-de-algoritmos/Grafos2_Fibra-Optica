@@ -81,20 +81,23 @@ void Grafo::dijkstra(int id1, int id2){
     listaPrioridades.push_back(dist_temp);
     while(!listaPrioridades.empty()){
         Cidade aux = cidades[listaPrioridades[0].destino]; 
-        Distancia d; 
-        d.valor = listaPrioridades[0].valor;
-        d.destino = listaPrioridades[0].destino;
-        d.origem = listaPrioridades[0].origem;
-        distancias[aux.getId()] = d;
+        distancias[aux.getId()] = listaPrioridades[0];
         listaPrioridades.erase(listaPrioridades.begin());
         for(Aresta a: aux.getArestas()){
             dist_temp.origem = aux.getId();
             dist_temp.destino = a.destino; 
             dist_temp.valor = a.peso + distancias[aux.getId()].valor; 
             int pos = verificaSub(listaPrioridades,distancias,dist_temp);
+            if(pos >= 0){
+                listaPrioridades.erase(listaPrioridades.begin()+pos); 
+                listaPrioridades.push_back(dist_temp);
+            }
+            else if(pos == -1)
+                listaPrioridades.push_back(dist_temp); 
         }
+        sort(listaPrioridades.begin(), listaPrioridades.end(), [](Distancia a, Distancia b){return (a.valor < b.valor); 
+        });
     }
-
 }
 
  int Grafo::verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp){

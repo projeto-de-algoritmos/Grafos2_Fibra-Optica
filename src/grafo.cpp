@@ -4,8 +4,8 @@
 
 using namespace std;
 
-void Grafo::novoVertice(string nome) {
-    cidades.push_back(Cidade(cidades.size(), nome));
+void Grafo::novoVertice(string nome, bool instalada) {
+    cidades.push_back(Cidade(cidades.size(), nome, instalada));
 }
 
 void Grafo::imprimirCidades() {
@@ -45,7 +45,7 @@ int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
 
 void Grafo::copiarGrafo(Grafo &grafo) {
     for(Cidade cidade: cidades)
-        grafo.novoVertice(cidade.getNome());
+        grafo.novoVertice(cidade.getNome(), cidade.isInstalada());
 }
 
 int Grafo::buscarCidade(string nome){
@@ -84,7 +84,7 @@ void Grafo::dijkstra(int id1){
     vector <Distancia> listaPrioridades;
     int cidadeProxima; 
     if(verificaInstalacao(id1))
-        return;
+       return;
     dist_temp = criarDistancia(id1); 
     listaPrioridades.push_back(dist_temp);
     while(!listaPrioridades.empty()){
@@ -93,7 +93,7 @@ void Grafo::dijkstra(int id1){
         if(aux.isInstalada()){
             cidadeProxima = aux.getId(); 
             break;
-        }
+        } 
         listaPrioridades.erase(listaPrioridades.begin());
         for(Aresta a: aux.getArestas()){
             dist_temp.origem = aux.getId();
@@ -110,7 +110,7 @@ void Grafo::dijkstra(int id1){
         sort(listaPrioridades.begin(), listaPrioridades.end(), [](Distancia a, Distancia b){return (a.valor < b.valor); 
         });
     }
-    cout << "A distância para a cidade mais próxima com instalação é de" << distancias[cidadeProxima].valor << " km" << endl;
+    cout << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
 }
 
 
@@ -135,7 +135,7 @@ int Grafo::verificaSub(vector<Distancia> lista, vector <Distancia> distancias, D
 
 bool Grafo::verificaInstalacao(int id){
     if(id == -1)
-        return false;
+        return true;
     if(cidades[id].isInstalada()){
         cout << "A cidade já tem instalação" << endl;
         return true; 

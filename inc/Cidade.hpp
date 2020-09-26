@@ -16,13 +16,14 @@ private:
     vector <Aresta> vizinhos;
     bool instalada; 
 public: 
-    Cidade(int id, string nome);
+    Cidade(int id, string nome, bool instalada);
     int getId();
     string getNome();
     void imprimeDados();
     vector <Aresta> getArestas();
     void novoVizinho(int id, int peso);
     bool isInstalada();
+
 };
 
 #endif

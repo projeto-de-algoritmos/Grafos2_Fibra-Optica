@@ -66,7 +66,15 @@ void InterfacePrincipal::menuCidades() {
 
 void InterfacePrincipal::cadastroCidade() {
     string nome = getString("Nome da cidade: ");
-    grafo.novoVertice(nome);
+    string resp = getString("Possui instalação? (S)sim (N)não");
+    bool instalada; 
+    resp[0] = toupper(resp[0]);
+    if(resp[0] == 'S')
+        instalada = true;
+    else
+        instalada = false; 
+    
+    grafo.novoVertice(nome,instalada);
 }
 
 void InterfacePrincipal::conectarCidades() {
@@ -86,7 +94,7 @@ void InterfacePrincipal::menuAnalise() {
         if(opcao == 1)
             grafo.prim();
         else if(opcao == 2){
-            string cidade = getString("Nome da cidade: ");
+            string cidade = getString("Nome da cidade: "); 
             grafo.dijkstra(grafo.buscarCidade(cidade));
         }
         else

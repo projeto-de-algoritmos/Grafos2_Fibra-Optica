@@ -1,8 +1,9 @@
 #include "Cidade.hpp"
 
-Cidade::Cidade(int id, string nome) {
+Cidade::Cidade(int id, string nome, bool instalada) {
     this->nome = nome;
     this->id = id;
+    this->instalada = instalada;
 }
 
 int Cidade::getId() {
@@ -33,3 +34,4 @@ void Cidade::novoVizinho(int id, int peso) {
 bool Cidade::isInstalada(){
     return instalada;
 }
+

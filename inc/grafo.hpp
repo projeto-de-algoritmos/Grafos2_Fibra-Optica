@@ -13,7 +13,7 @@ private:
     vector <Cidade> cidades;
 public:
     void conectar(string a, string b, int custo);
-    void novoVertice(string nome);
+    void novoVertice(string nome, bool instalada);
     void imprimirCidades();
     int buscarCidade(string nome); 
     void prim();

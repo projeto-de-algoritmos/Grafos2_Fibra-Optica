@@ -17,6 +17,7 @@ public:
     void imprimirCidades();
     void prim();
     void dijkstra(int id1, int id2); 
+    void resultadoDijkstra(vector <Distancia>distancias, int id1, int id2);
     int verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp);
     int custoMinimo(vector <int> &custos, vector <bool> &visitados);
     void copiarGrafo(Grafo &grafo);

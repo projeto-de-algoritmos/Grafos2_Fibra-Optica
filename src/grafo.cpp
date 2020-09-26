@@ -98,9 +98,16 @@ void Grafo::dijkstra(int id1, int id2){
         sort(listaPrioridades.begin(), listaPrioridades.end(), [](Distancia a, Distancia b){return (a.valor < b.valor); 
         });
     }
+    resultadoDijkstra(distancias, id1 ,id2);
 }
 
- int Grafo::verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp){
+void Grafo::resultadoDijkstra(vector <Distancia> distancias, int id1, int id2){
+    cout << "O menor caminho de " << cidades[id1].getNome() << " para " << cidades[id2].getNome(); 
+    cout << " é de " << distancias[id2].valor;  
+
+}
+
+int Grafo::verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp){
             int achou = -1;
             int pos = -1;
             if(distancias[temp.destino].valor != -1)

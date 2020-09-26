@@ -15,9 +15,11 @@ public:
     void conectar(string a, string b, int custo);
     void novoVertice(string nome);
     void imprimirCidades();
+    int buscarCidade(string nome); 
     void prim();
-    void dijkstra(int id1, int id2); 
-    void resultadoDijkstra(vector <Distancia>distancias, int id1, int id2);
+    void dijkstra(int id1); 
+    bool verificaInstalacao(int id);
+    Distancia criarDistancia(int id); 
     int verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp);
     int custoMinimo(vector <int> &custos, vector <bool> &visitados);
     void copiarGrafo(Grafo &grafo);

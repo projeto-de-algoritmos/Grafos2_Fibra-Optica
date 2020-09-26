@@ -12,6 +12,7 @@ public:
     void menuAnalise();
     void cadastroCidade();
     void conectarCidades();
+    void menuInstalacao();
 };
 
 #endif

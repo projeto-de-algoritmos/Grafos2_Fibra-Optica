@@ -80,12 +80,20 @@ void InterfacePrincipal::menuAnalise() {
     while(true) {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
-        cout << "(2) Calcular manutenção" << endl; //Dijkstra
+        cout << "(2) Calcular custo para uma instalação" << endl; //Dijkstra
         cout << "(0) Voltar" << endl;
         int opcao = getInt("");
         if(opcao == 1)
             grafo.prim();
+        else if(opcao == 2){
+            string cidade = getString("Nome da cidade: ");
+            grafo.dijkstra(grafo.buscarCidade(cidade));
+        }
         else
             return;
     }
 }
+
+
+    
+

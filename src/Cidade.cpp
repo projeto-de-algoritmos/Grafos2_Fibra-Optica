@@ -30,3 +30,6 @@ void Cidade::novoVizinho(int id, int peso) {
     vizinhos.push_back(aresta);
 }
 
+bool Cidade::isInstalada(){
+    return instalada;
+}

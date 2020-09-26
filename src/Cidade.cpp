@@ -10,9 +10,19 @@ Cidade::Cidade(int id, string nome){
 int Cidade::getId(){
     return id;
 }
-string Cidade::getNome(){
-    return nome; 
+
+void Cidade::conectar(int id, int peso) {
+    Aresta temp; 
+    temp.destino = id;
+    temp.peso = peso;
+    vizinhos.push_back(temp);
 }
+
+string Cidade::getNome(){
+    return nome;
+}
+
 void Cidade::imprimeDados(){
     cout << nome << endl;
+
 }

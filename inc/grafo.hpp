@@ -25,6 +25,7 @@ public:
     void copiarGrafo(Grafo &grafo);
     void reset();
     int getTamanho();
+    void inverterStatus(string nome);
 };
 
 #endif

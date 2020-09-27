@@ -57,7 +57,8 @@ void InterfacePrincipal::menuCidades() {
         cout << "(2) Conectar cidades" << endl;
         cout << "(3) Desconectar cidades" << endl;
         cout << "(4) Ver cidades" << endl;
-        cout << "(5) Deletar todas as cidades" << endl;
+        cout << "(5) Alterar status de instalação" << endl;
+        cout << "(6) Deletar todas as cidades" << endl;
         cout << "(0) Voltar" << endl;
         int opcao = getInput<int>("");
         if(opcao == 1)
@@ -67,6 +68,9 @@ void InterfacePrincipal::menuCidades() {
         else if(opcao == 4)
             grafo.imprimirCidades();
         else if(opcao == 5) {
+            string nome = getString("Nome de cidade: ");
+            grafo.inverterStatus(nome);
+        } else if(opcao == 6) {
             grafo.reset();
             cout << "Todas as cidades foram excluídas." << endl;
         } else

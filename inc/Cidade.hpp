@@ -23,7 +23,7 @@ public:
     vector <Aresta> getArestas();
     void novoVizinho(int id, int peso);
     bool isInstalada();
-
+    void setInstalada(bool instalada);
 };
 
 #endif

@@ -11,7 +11,11 @@ void Grafo::novoVertice(string nome, bool instalada) {
 void Grafo::imprimirCidades() {
     cout << endl;
     for(Cidade c: cidades) {
-        cout << c.getNome() << endl;
+        cout << c.getNome();
+        if(c.isInstalada())
+            cout << " (instalada)" << endl;
+        else
+            cout << " (não instalada)" << endl;
         for(Aresta a: c.getArestas())
             cout << "   " << a.peso << " km para " << cidades[a.destino].getNome() << endl;
         cout << endl;
@@ -168,4 +172,20 @@ Distancia Grafo::criarDistancia(int id){
     dist_temp.destino = id;
     dist_temp.valor = 0;
     return dist_temp;
+}
+
+void Grafo::inverterStatus(string nome) {
+    Cidade *cidade;
+    for(int i = 0; i < cidades.size(); i++) {
+        if(cidades[i].getNome() == nome) {
+            cidade = &cidades[i];
+            cidades[i].setInstalada(!cidades[i].isInstalada());
+            break;
+        }
+    }
+    cout << cidade->getNome() << " agora ";
+    if(cidade->isInstalada())
+        cout << "possui instalação." << endl;
+    else
+        cout << "não possui instalação." << endl;
 }

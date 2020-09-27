@@ -35,3 +35,6 @@ bool Cidade::isInstalada(){
     return instalada;
 }
 
+void Cidade::setInstalada(bool instalada) {
+    this->instalada = instalada;
+}

@@ -82,22 +82,35 @@ void InterfacePrincipal::menuCidades() {
 
 void InterfacePrincipal::cadastroCidade() {
     string nome = getString("Nome da cidade: ");
-    string resp = getString("Possui instalação? (S) sim (N) não: ");
-    bool instalada; 
-    resp[0] = toupper(resp[0]);
-    if(resp[0] == 'S')
-        instalada = true;
+    if(!verificaCidade(nome)) {
+        string resp = getString("Possui instalação? (S) sim (N) não: ");
+        bool instalada; 
+        resp[0] = toupper(resp[0]);
+        if(resp[0] == 'S')
+            instalada = true;
+        else
+            instalada = false; 
+        
+        grafo.novoVertice(nome,instalada);
+    }
     else
-        instalada = false; 
-    
-    grafo.novoVertice(nome,instalada);
+        cout << "Cidade já cadastrada" << endl;
 }
+
+bool InterfacePrincipal::verificaCidade(string nome){
+    int existe = grafo.buscarCidade(nome);
+    if(existe == -1)
+        return false;
+    return true; 
+}
+
 
 void InterfacePrincipal::conectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
     int custo = getInput<int>("Distância entre as cidades (km): ");
-    grafo.conectar(cidade1, cidade2, custo);
+    if(verificaCidade(cidade1) && verificaCidade(cidade2))
+        grafo.conectar(cidade1, cidade2, custo);
 }
 
 void InterfacePrincipal::desconectarCidades() {
@@ -122,7 +135,10 @@ void InterfacePrincipal::menuAnalise() {
             custoTotal();
         else if(opcao == 2){
             string cidade = getString("Nome da cidade: "); 
-            grafo.dijkstra(grafo.buscarCidade(cidade));
+            if(verificaCidade(cidade))
+                grafo.dijkstra(grafo.buscarCidade(cidade));
+            else
+                cout << "Cidade não encontrada" << endl;
         } else if(opcao == 3)
             custoFibra = getInput<double>("Custo da fibra óptica por km: ");
         else

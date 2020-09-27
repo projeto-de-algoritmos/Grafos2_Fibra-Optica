@@ -77,10 +77,12 @@ void Grafo::copiarGrafo(Grafo &grafo) {
 }
 
 int Grafo::buscarCidade(string nome){
+    int id = -1;
     for(Cidade c: cidades){
         if(c.getNome() == nome)
             return (c.getId()); 
     }
+    return id;
 }
 
 int Grafo::prim() {

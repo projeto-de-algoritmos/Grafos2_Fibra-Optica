@@ -17,6 +17,7 @@ public:
     void desconectarCidades();
     void menuInstalacao();
     void custoTotal();
+    bool verificaCidade(string nome); 
 };
 
 #endif

@@ -57,6 +57,7 @@ void InterfacePrincipal::menuCidades() {
         cout << "(2) Conectar cidades" << endl;
         cout << "(3) Desconectar cidades" << endl;
         cout << "(4) Ver cidades" << endl;
+        cout << "(5) Deletar todas as cidades" << endl;
         cout << "(0) Voltar" << endl;
         int opcao = getInput<int>("");
         if(opcao == 1)
@@ -65,7 +66,10 @@ void InterfacePrincipal::menuCidades() {
             conectarCidades();
         else if(opcao == 4)
             grafo.imprimirCidades();
-        else
+        else if(opcao == 5) {
+            grafo.reset();
+            cout << "Todas as cidades foram excluídas." << endl;
+        } else
             return;
     }
 }
@@ -91,6 +95,10 @@ void InterfacePrincipal::conectarCidades() {
 }
 
 void InterfacePrincipal::menuAnalise() {
+    if(grafo.getTamanho() == 0) {
+        cout << "É necessário cadastrar no mínimo duas cidades" << endl;
+        return;
+    }
     while(true) {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST

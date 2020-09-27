@@ -16,6 +16,16 @@ void Grafo::imprimirCidades() {
             cout << "   " << a.peso << " km para " << cidades[a.destino].getNome() << endl;
         cout << endl;
     }
+    if(cidades.empty())
+        cout << "Não há cidades cadastradas." << endl;
+}
+
+int Grafo::getTamanho() {
+    return cidades.size();
+}
+
+void Grafo::reset() {
+    cidades.clear();
 }
 
 void Grafo::conectar(string a, string b, int custo) {

@@ -23,6 +23,8 @@ public:
     int verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp);
     int custoMinimo(vector <int> &custos, vector <bool> &visitados);
     void copiarGrafo(Grafo &grafo);
+    void reset();
+    int getTamanho();
 };
 
 #endif

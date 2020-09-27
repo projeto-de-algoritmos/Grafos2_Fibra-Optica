@@ -42,8 +42,12 @@ void Grafo::conectar(string a, string b, int custo) {
         if(cidadeA != -1 && cidadeB != -1)
             break;
     }
-    cidades[cidadeA].novoVizinho(cidadeB, custo);
-    cidades[cidadeB].novoVizinho(cidadeA, custo);
+    if(!cidades[cidadeA].isVizinho(cidadeB)){
+        cidades[cidadeA].novoVizinho(cidadeB, custo);
+        cidades[cidadeB].novoVizinho(cidadeA, custo);
+    }
+    else 
+        cout << "As cidades já estão conectadas" << endl;
 }
 
 void Grafo::desconectar(string nome1, string nome2) {

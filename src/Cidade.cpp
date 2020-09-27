@@ -50,3 +50,11 @@ void Cidade::deletaVizinho(int vizinhoId) {
         }
     }
 }
+
+bool Cidade::isVizinho(int id){
+    for(Aresta a: vizinhos){
+        if(a.destino == id) 
+            return true;
+    }
+    return false;
+}

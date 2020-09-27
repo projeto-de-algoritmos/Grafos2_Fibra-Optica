@@ -25,6 +25,7 @@ public:
     bool isInstalada();
     void setInstalada(bool instalada);
     void deletaVizinho(int vizinhoId);
+    bool isVizinho(int id);
 };
 
 #endif

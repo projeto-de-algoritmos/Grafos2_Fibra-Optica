@@ -109,10 +109,11 @@ bool InterfacePrincipal::verificaCidade(string nome){
 void InterfacePrincipal::conectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
-    int custo = getInput<int>("Distância entre as cidades (km): ");
     if(verificaCidade(cidade1) && verificaCidade(cidade2)){
-        if(cidade1 != cidade2)
+        if(cidade1 != cidade2){
+            int custo = getInput<int>("Distância entre as cidades (km): ");
             grafo.conectar(cidade1, cidade2, custo);
+        }
         else
             cout << "Não pode conectar a mesma cidade" << endl;
     }
@@ -140,13 +141,9 @@ void InterfacePrincipal::menuAnalise() {
         int opcao = getInput<int>("");
         if(opcao == 1)
             custoTotal();
-        else if(opcao == 2){
-            string cidade = getString("Nome da cidade: "); 
-            if(verificaCidade(cidade))
-                grafo.dijkstra(grafo.buscarCidade(cidade));
-            else
-                cout << "Cidade não encontrada" << endl;
-        } else if(opcao == 3)
+        else if(opcao == 2)
+            custoUnico();
+        else if(opcao == 3)
             custoFibra = getInput<double>("Custo da fibra óptica por km: ");
         else
             return;
@@ -156,4 +153,17 @@ void InterfacePrincipal::menuAnalise() {
 void InterfacePrincipal::custoTotal() {
     int total = grafo.prim();
     cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
+}
+
+void InterfacePrincipal::custoUnico(){
+    string cidade = getString("Nome da cidade: "); 
+    if(verificaCidade(cidade)){
+        int menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
+        if(menorDist != -1)
+            cout << fixed << setprecision(2) << "Custo de instalação: R$" << menorDist * custoFibra << endl;
+        else 
+            cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
+    }
+    else
+        cout << "Cidade não encontrada" << endl;
 }

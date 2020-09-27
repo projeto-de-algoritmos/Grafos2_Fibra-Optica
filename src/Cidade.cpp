@@ -29,6 +29,7 @@ void Cidade::novoVizinho(int id, int peso) {
     aresta.destino = id;
     aresta.peso = peso;
     vizinhos.push_back(aresta);
+    cout << "Cidades conectadas" << endl; 
 }
 
 bool Cidade::isInstalada(){
@@ -40,7 +41,8 @@ void Cidade::setInstalada(bool instalada) {
 }
 
 void Cidade::deletaVizinho(int vizinhoId) {
-    for(int i = 0; i < vizinhos.size(); i++) {
+    int tamanho = vizinhos.size();
+    for(int i = 0; i < tamanho; i++) {
         if(vizinhos[i].destino == vizinhoId) {
             vizinhos.erase(vizinhos.begin() + i);
             cout << "As cidades foram desconectadas" << endl;

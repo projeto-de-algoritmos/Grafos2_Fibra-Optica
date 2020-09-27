@@ -118,14 +118,13 @@ int Grafo::prim() {
     cout << endl << total << " km de fibra óptica serão necessários." << endl;
     return total;
 }
-
-void Grafo::dijkstra(int id1){
+int Grafo::dijkstra(int id1){
     Distancia dist_temp;
     vector <Distancia> distancias(cidades.size());
     vector <Distancia> listaPrioridades;
-    int cidadeProxima; 
+    int cidadeProxima = -1; 
     if(verificaInstalacao(id1))
-       return;
+       return -1;
     dist_temp = criarDistancia(id1); 
     listaPrioridades.push_back(dist_temp);
     while(!listaPrioridades.empty()){
@@ -151,7 +150,11 @@ void Grafo::dijkstra(int id1){
         sort(listaPrioridades.begin(), listaPrioridades.end(), [](Distancia a, Distancia b){return (a.valor < b.valor); 
         });
     }
-    cout << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+    if(cidadeProxima != -1){
+        cout << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+        return distancias[cidadeProxima].valor; 
+    }
+    return -1;
 }
 
 
@@ -194,7 +197,8 @@ Distancia Grafo::criarDistancia(int id){
 
 void Grafo::inverterStatus(string nome) {
     Cidade *cidade;
-    for(int i = 0; i < cidades.size(); i++) {
+    int tamanho = cidades.size();
+    for(int i = 0; i < tamanho; i++) {
         if(cidades[i].getNome() == nome) {
             cidade = &cidades[i];
             cidades[i].setInstalada(!cidades[i].isInstalada());

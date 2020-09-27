@@ -1,6 +1,7 @@
 #include "interfacePrincipal.hpp"
 
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -71,7 +72,7 @@ void InterfacePrincipal::menuCidades() {
 
 void InterfacePrincipal::cadastroCidade() {
     string nome = getString("Nome da cidade: ");
-    string resp = getString("Possui instalação? (S)sim (N)não");
+    string resp = getString("Possui instalação? (S) sim (N) não: ");
     bool instalada; 
     resp[0] = toupper(resp[0]);
     if(resp[0] == 'S')
@@ -98,7 +99,7 @@ void InterfacePrincipal::menuAnalise() {
         cout << "(0) Voltar" << endl;
         int opcao = getInput<int>("");
         if(opcao == 1)
-            grafo.prim();
+            custoTotal();
         else if(opcao == 2){
             string cidade = getString("Nome da cidade: "); 
             grafo.dijkstra(grafo.buscarCidade(cidade));
@@ -107,4 +108,9 @@ void InterfacePrincipal::menuAnalise() {
         else
             return;
     }
+}
+
+void InterfacePrincipal::custoTotal() {
+    int total = grafo.prim();
+    cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
 }

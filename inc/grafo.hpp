@@ -16,7 +16,7 @@ public:
     void novoVertice(string nome, bool instalada);
     void imprimirCidades();
     int buscarCidade(string nome); 
-    void prim();
+    int prim();
     void dijkstra(int id1); 
     bool verificaInstalacao(int id);
     Distancia criarDistancia(int id); 

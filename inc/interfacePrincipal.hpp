@@ -15,6 +15,7 @@ public:
     void cadastroCidade();
     void conectarCidades();
     void menuInstalacao();
+    void custoTotal();
 };
 
 #endif

@@ -55,11 +55,11 @@ int Grafo::buscarCidade(string nome){
     }
 }
 
-void Grafo::prim() {
-    vector <int> predecessores(cidades.size(), -1), custos(cidades.size(), INT_MAX);
+int Grafo::prim() {
+    vector <int> predecessores(cidades.size(), -1), custos(cidades.size(), INT_MAX), distancias;
     vector <bool> visitados(cidades.size(), false);
-    Grafo arvore;
-    copiarGrafo(arvore);
+    vector<vector<string>> vertices;
+    int total = 0;
     custos[0] = 0;
     predecessores[0] = -1;
     for(int i = 0; i < cidades.size(); i++) {
@@ -71,11 +71,20 @@ void Grafo::prim() {
                 custos[aresta.destino] = aresta.peso;
             }
         }
-        if(predecessores[u] != -1)
-            arvore.conectar(cidades[u].getNome(), cidades[predecessores[u]].getNome(), custos[u]);
+        if(predecessores[u] != -1) {
+            vector<string> par;
+            par.push_back(cidades[u].getNome());
+            par.push_back(cidades[predecessores[u]].getNome());
+            vertices.push_back(par);
+            par.clear();
+            distancias.push_back(custos[u]);
+            total += custos[u];
+        }
     }
-    cout << endl;
-    arvore.imprimirCidades();
+    for(int i = 0; i < vertices.size(); i++)
+        cout << vertices[i][0] << " - " << vertices[i][1] << "   " << distancias[i] << " km" << endl;
+    cout << endl << total << " km de fibra óptica serão necessários." << endl;
+    return total;
 }
 
 void Grafo::dijkstra(int id1){

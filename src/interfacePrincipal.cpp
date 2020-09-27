@@ -111,6 +111,8 @@ void InterfacePrincipal::conectarCidades() {
     int custo = getInput<int>("Distância entre as cidades (km): ");
     if(verificaCidade(cidade1) && verificaCidade(cidade2))
         grafo.conectar(cidade1, cidade2, custo);
+    else 
+        cout << "Uma das cidades ainda não foi cadastrada. Cadastre-a e tente novamente!" << endl; 
 }
 
 void InterfacePrincipal::desconectarCidades() {

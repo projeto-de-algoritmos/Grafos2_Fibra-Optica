@@ -65,6 +65,8 @@ void InterfacePrincipal::menuCidades() {
             cadastroCidade();
         else if(opcao == 2)
             conectarCidades();
+        else if(opcao == 3)
+            desconectarCidades();
         else if(opcao == 4)
             grafo.imprimirCidades();
         else if(opcao == 5) {
@@ -96,6 +98,12 @@ void InterfacePrincipal::conectarCidades() {
     string cidade2 = getString("Nome da cidade 2: ");
     int custo = getInput<int>("Distância entre as cidades (km): ");
     grafo.conectar(cidade1, cidade2, custo);
+}
+
+void InterfacePrincipal::desconectarCidades() {
+    string cidade1 = getString("Nome da cidade 1: ");
+    string cidade2 = getString("Nome da cidade 2: ");
+    grafo.desconectar(cidade1, cidade2);
 }
 
 void InterfacePrincipal::menuAnalise() {

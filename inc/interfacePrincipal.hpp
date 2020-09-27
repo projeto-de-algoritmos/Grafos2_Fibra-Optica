@@ -14,6 +14,7 @@ public:
     void menuAnalise();
     void cadastroCidade();
     void conectarCidades();
+    void desconectarCidades();
     void menuInstalacao();
     void custoTotal();
 };

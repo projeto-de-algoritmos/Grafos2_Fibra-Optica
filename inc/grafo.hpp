@@ -26,6 +26,7 @@ public:
     void reset();
     int getTamanho();
     void inverterStatus(string nome);
+    void desconectar(string nome1, string nome2);
 };
 
 #endif

@@ -46,6 +46,20 @@ void Grafo::conectar(string a, string b, int custo) {
     cidades[cidadeB].novoVizinho(cidadeA, custo);
 }
 
+void Grafo::desconectar(string nome1, string nome2) {
+    int id1 = -1, id2 = -1;
+    for(int i = 0; i < cidades.size(); i++) {
+        if(cidades[i].getNome() == nome1)
+            id1 = i;
+        else if(cidades[i].getNome() == nome2)
+            id2 = i;
+        if(id1 != -1 && id2 != -1)
+            break;
+    }
+    cidades[id1].deletaVizinho(id2);
+    cidades[id2].deletaVizinho(id1);
+}
+
 int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
     int minimo = INT_MAX, posicao;
     for(int i = 0; i < custos.size(); i++) {

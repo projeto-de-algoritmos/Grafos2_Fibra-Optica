@@ -24,6 +24,7 @@ public:
     void novoVizinho(int id, int peso);
     bool isInstalada();
     void setInstalada(bool instalada);
+    void deletaVizinho(int vizinhoId);
 };
 
 #endif

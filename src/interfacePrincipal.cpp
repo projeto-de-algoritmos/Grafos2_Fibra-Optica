@@ -11,8 +11,9 @@ string getString(string mensagem) {
     return entrada;
 }
 
-int getInt(string mensagem) {
-    int entrada;
+template <typename T>
+T getInput(string mensagem) {
+    T entrada;
     bool loop = true;
     while(loop) {
         cout << mensagem;
@@ -28,13 +29,17 @@ int getInt(string mensagem) {
     return entrada;
 }
 
+InterfacePrincipal::InterfacePrincipal() {
+    custoFibra = 500;
+}
+
 void InterfacePrincipal::menuPrincipal() {
     while(true) {
         cout << endl;
         cout << "(1) Gerenciamento de cidades" << endl;
         cout << "(2) Menu de análise" << endl;
         cout << "(0) Finalizar o programa" << endl;
-        int opcao = getInt("");
+        int opcao = getInput<int>("");
         if(opcao == 1)
             menuCidades();
         else if(opcao == 2)
@@ -52,7 +57,7 @@ void InterfacePrincipal::menuCidades() {
         cout << "(3) Desconectar cidades" << endl;
         cout << "(4) Ver cidades" << endl;
         cout << "(0) Voltar" << endl;
-        int opcao = getInt("");
+        int opcao = getInput<int>("");
         if(opcao == 1)
             cadastroCidade();
         else if(opcao == 2)
@@ -80,7 +85,7 @@ void InterfacePrincipal::cadastroCidade() {
 void InterfacePrincipal::conectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
-    int custo = getInt("Distância entre as cidades (km): ");
+    int custo = getInput<int>("Distância entre as cidades (km): ");
     grafo.conectar(cidade1, cidade2, custo);
 }
 
@@ -89,19 +94,17 @@ void InterfacePrincipal::menuAnalise() {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
         cout << "(2) Calcular custo para uma instalação" << endl; //Dijkstra
+        cout << "(3) Alterar custo da fibra óptica" << endl;
         cout << "(0) Voltar" << endl;
-        int opcao = getInt("");
+        int opcao = getInput<int>("");
         if(opcao == 1)
             grafo.prim();
         else if(opcao == 2){
             string cidade = getString("Nome da cidade: "); 
             grafo.dijkstra(grafo.buscarCidade(cidade));
-        }
+        } else if(opcao == 3)
+            custoFibra = getInput<double>("Custo da fibra óptica por km: ");
         else
             return;
     }
 }
-
-
-    
-

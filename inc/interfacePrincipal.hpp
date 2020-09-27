@@ -6,7 +6,9 @@
 class InterfacePrincipal {
 private:
     Grafo grafo;
+    double custoFibra;
 public:
+    InterfacePrincipal();
     void menuPrincipal();
     void menuCidades();
     void menuAnalise();

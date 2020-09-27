@@ -71,7 +71,8 @@ void InterfacePrincipal::menuCidades() {
             grafo.imprimirCidades();
         else if(opcao == 5) {
             string nome = getString("Nome de cidade: ");
-            grafo.inverterStatus(nome);
+            if(verificaCidade(nome))
+                grafo.inverterStatus(nome);
         } else if(opcao == 6) {
             grafo.reset();
             cout << "Todas as cidades foram excluídas." << endl;

@@ -43,6 +43,7 @@ void Cidade::deletaVizinho(int vizinhoId) {
     for(int i = 0; i < vizinhos.size(); i++) {
         if(vizinhos[i].destino == vizinhoId) {
             vizinhos.erase(vizinhos.begin() + i);
+            cout << "As cidades foram desconectadas" << endl;
             return;
         }
     }

@@ -123,8 +123,7 @@ void InterfacePrincipal::conectarCidades() {
 void InterfacePrincipal::desconectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
-    if(verificaCidade(cidade1) && verificaCidade(cidade2))
-        grafo.desconectar(cidade1, cidade2);
+    grafo.desconectar(cidade1, cidade2);
 }
 
 void InterfacePrincipal::menuAnalise() {

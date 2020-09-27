@@ -56,8 +56,10 @@ void Grafo::desconectar(string nome1, string nome2) {
         if(id1 != -1 && id2 != -1)
             break;
     }
-    cidades[id1].deletaVizinho(id2);
-    cidades[id2].deletaVizinho(id1);
+    if(id1 != -1 && id2 != -1) {
+        cidades[id1].deletaVizinho(id2);
+        cidades[id2].deletaVizinho(id1);
+    }
 }
 
 int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {

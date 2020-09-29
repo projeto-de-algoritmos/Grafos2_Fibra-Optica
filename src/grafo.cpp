@@ -33,8 +33,8 @@ void Grafo::reset() {
 }
 
 void Grafo::conectar(string a, string b, int custo) {
-    int cidadeA = -1, cidadeB = -1;
-    for(int i = 0; i < cidades.size(); i++) {
+    int cidadeA = -1, cidadeB = -1, tamanho = cidades.size();
+    for(int i = 0; i < tamanho; i++) {
         if(cidades[i].getNome() == a)
             cidadeA = i;
         else if(cidades[i].getNome() == b)
@@ -51,8 +51,8 @@ void Grafo::conectar(string a, string b, int custo) {
 }
 
 void Grafo::desconectar(string nome1, string nome2) {
-    int id1 = -1, id2 = -1;
-    for(int i = 0; i < cidades.size(); i++) {
+    int id1 = -1, id2 = -1, tamanho = cidades.size();
+    for(int i = 0; i < tamanho; i++) {
         if(cidades[i].getNome() == nome1)
             id1 = i;
         else if(cidades[i].getNome() == nome2)
@@ -67,8 +67,8 @@ void Grafo::desconectar(string nome1, string nome2) {
 }
 
 int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
-    int minimo = INT_MAX, posicao = -1;
-    for(int i = 0; i < custos.size(); i++) {
+    int minimo = INT_MAX, posicao = -1, tamanho = custos.size();
+    for(int i = 0; i < tamanho; i++) {
         if(!visitados[i] && custos[i] < minimo) {
             minimo = custos[i];
             posicao = i;
@@ -98,7 +98,8 @@ int Grafo::prim(string nome) {
     vector<vector<string>> vertices;
     int total = 0, u = verticeInicial;
     custos[verticeInicial] = 0;
-    for(int i = 0; i < cidades.size(); i++) {
+    int tamanho = cidades.size();
+    for(int i = 0; i < tamanho; i++) {
         if(i > 0)
             u = custoMinimo(custos, visitados);
         if(u == -1)
@@ -120,7 +121,8 @@ int Grafo::prim(string nome) {
             total += custos[u];
         }
     }
-    for(int i = 0; i < vertices.size(); i++)
+    tamanho = vertices.size();
+    for(int i = 0; i < tamanho; i++)
         cout << vertices[i][0] << " - " << vertices[i][1] << "   " << distancias[i] << " km" << endl;
     cout << endl << total << " km de fibra óptica serão necessários." << endl;
     return total;

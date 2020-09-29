@@ -75,7 +75,7 @@ void InterfacePrincipal::menuCidades() {
                 grafo.inverterStatus(nome);
         } else if(opcao == 6) {
             grafo.reset();
-            cout << "Todas as cidades foram excluídas." << endl;
+            cout << endl << "Todas as cidades foram excluídas." << endl;
         } else
             return;
     }
@@ -87,15 +87,18 @@ void InterfacePrincipal::cadastroCidade() {
         string resp = getString("Possui instalação? (S) sim (N) não: ");
         bool instalada; 
         resp[0] = toupper(resp[0]);
-        if(resp[0] == 'S')
+        cout << endl << nome << " foi cadastrada como cidade ";
+        if(resp[0] == 'S') {
             instalada = true;
-        else
+            cout << "com instalação" << endl;
+        } else {
             instalada = false; 
-        
+            cout << "sem instalação" << endl;
+        }
         grafo.novoVertice(nome,instalada);
     }
     else
-        cout << "Cidade já cadastrada" << endl;
+        cout << endl << "Cidade já cadastrada" << endl;
 }
 
 bool InterfacePrincipal::verificaCidade(string nome){
@@ -110,15 +113,20 @@ void InterfacePrincipal::conectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
     if(verificaCidade(cidade1) && verificaCidade(cidade2)){
-        if(cidade1 != cidade2){
-            int custo = getInput<int>("Distância entre as cidades (km): ");
+        if(cidade1 != cidade2) {
+            int custo = 0;
+            while(custo <= 0) {
+                custo = getInput<int>("Distância entre as cidades (km): ");
+                if(custo <= 0)
+                    cout << "Custo inválido" << endl;
+            }
             grafo.conectar(cidade1, cidade2, custo);
         }
         else
             cout << "Não pode conectar a mesma cidade" << endl;
     }
     else 
-        cout << "Pelo menos uma das cidades ainda não foi cadastrada. Cadastre-a e tente novamente!" << endl; 
+        cout << endl << "Pelo menos uma das cidades ainda não foi cadastrada. Cadastre-a e tente novamente!" << endl; 
 }
 
 void InterfacePrincipal::desconectarCidades() {
@@ -128,32 +136,47 @@ void InterfacePrincipal::desconectarCidades() {
 }
 
 void InterfacePrincipal::menuAnalise() {
-    if(grafo.getTamanho() < 2) {
-        cout << "É necessário cadastrar no mínimo duas cidades" << endl;
+    if(!grafo.temConexao()) {
+        cout << endl << "Para acessar esse menu é necessário que exista no mínimo uma conexão" << endl;
         return;
     }
     while(true) {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
         cout << "(2) Calcular custo para uma instalação" << endl; //Dijkstra
-        cout << "(3) Alterar custo da fibra óptica" << endl;
+        cout << fixed << setprecision(2) << "(3) Alterar custo da fibra óptica (Atual: R$ " << custoFibra << ")" << endl;
         cout << "(0) Voltar" << endl;
         int opcao = getInput<int>("");
         if(opcao == 1)
             custoTotal();
         else if(opcao == 2)
             custoUnico();
-        else if(opcao == 3)
-            custoFibra = getInput<double>("Custo da fibra óptica por km: ");
-        else
+        else if(opcao == 3) {
+            alterarCusto();
+        } else
             return;
     }
+}
+
+void InterfacePrincipal::alterarCusto() {
+    custoFibra = 0;
+    while(custoFibra <= 0) {
+        custoFibra = getInput<double>("Custo da fibra óptica por km: ");
+        if(custoFibra <= 0)
+            cout << "Valor inválido" << endl;
+    }
+    cout << fixed << setprecision(2) << "o custo do km da fibra óptica agora é R$ " << custoFibra << endl;
 }
 
 void InterfacePrincipal::custoTotal() {
     string nome = getString("Nome da cidade inicial: ");
     int total = grafo.prim(nome);
-    cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
+    if(total == -1)
+        cout << endl << "A cidade precisa estar conectada" << endl;
+    else if(total == 0)
+        cout << endl << "A cidade deve existir" << endl;
+    else
+        cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
 }
 
 void InterfacePrincipal::custoUnico(){
@@ -166,5 +189,5 @@ void InterfacePrincipal::custoUnico(){
             cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
     }
     else
-        cout << "Cidade não encontrada" << endl;
+        cout << endl << "Cidade não encontrada" << endl;
 }

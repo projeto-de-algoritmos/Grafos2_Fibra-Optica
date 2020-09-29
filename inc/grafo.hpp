@@ -24,7 +24,7 @@ public:
     int custoMinimo(vector <int> &custos, vector <bool> &visitados);
     void copiarGrafo(Grafo &grafo);
     void reset();
-    int getTamanho();
+    bool temConexao();
     void inverterStatus(string nome);
     void desconectar(string nome1, string nome2);
 };

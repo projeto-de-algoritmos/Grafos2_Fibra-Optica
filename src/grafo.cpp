@@ -13,9 +13,9 @@ void Grafo::imprimirCidades() {
     for(Cidade c: cidades) {
         cout << c.getNome();
         if(c.isInstalada())
-            cout << " (instalada)" << endl;
+            cout << " (tem instalação)" << endl;
         else
-            cout << " (não instalada)" << endl;
+            cout << " (não tem instalação)" << endl;
         for(Aresta a: c.getArestas())
             cout << "   " << a.peso << " km para " << cidades[a.destino].getNome() << endl;
         cout << endl;
@@ -24,8 +24,13 @@ void Grafo::imprimirCidades() {
         cout << "Não há cidades cadastradas." << endl;
 }
 
-int Grafo::getTamanho() {
-    return cidades.size();
+bool Grafo::temConexao() {
+    int tamanho = cidades.size();
+    for(int i = 0; i < tamanho; i++) {
+        if(cidades[i].temVizinho())
+            return true;
+    }
+    return false;
 }
 
 void Grafo::reset() {
@@ -45,6 +50,7 @@ void Grafo::conectar(string a, string b, int custo) {
     if(!cidades[cidadeA].isVizinho(cidadeB)){
         cidades[cidadeA].novoVizinho(cidadeB, custo);
         cidades[cidadeB].novoVizinho(cidadeA, custo);
+        cout << endl << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " é " << custo << " km" << endl;
     }
     else 
         cout << "As cidades já estão conectadas" << endl;
@@ -63,7 +69,9 @@ void Grafo::desconectar(string nome1, string nome2) {
     if(id1 != -1 && id2 != -1) {
         cidades[id1].deletaVizinho(id2);
         cidades[id2].deletaVizinho(id1);
-    }
+        cout << nome1 << " e " << nome2 << " foram desconectadas" << endl;
+    } else
+        cout << "As cidades devem existir e estarem conectadas" << endl;
 }
 
 int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
@@ -93,6 +101,9 @@ int Grafo::buscarCidade(string nome){
 
 int Grafo::prim(string nome) {
     int verticeInicial = buscarCidade(nome);
+    if(!cidades[verticeInicial].temVizinho()) {
+        return -1;
+    }
     vector <int> predecessores(cidades.size(), -1), custos(cidades.size(), INT_MAX), distancias;
     vector <bool> visitados(cidades.size(), false);
     vector<vector<string>> vertices;
@@ -122,11 +133,13 @@ int Grafo::prim(string nome) {
         }
     }
     tamanho = vertices.size();
+    cout << endl;
     for(int i = 0; i < tamanho; i++)
         cout << vertices[i][0] << " - " << vertices[i][1] << "   " << distancias[i] << " km" << endl;
     cout << endl << total << " km de fibra óptica serão necessários." << endl;
     return total;
 }
+
 int Grafo::dijkstra(int id1){
     Distancia dist_temp;
     vector <Distancia> distancias(cidades.size());
@@ -160,7 +173,8 @@ int Grafo::dijkstra(int id1){
         });
     }
     if(cidadeProxima != -1){
-        cout << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+        cout << endl << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+        cout << "Cidade mais próxima: " << cidades[cidadeProxima].getNome() << endl;
         return distancias[cidadeProxima].valor; 
     }
     return -1;
@@ -190,7 +204,7 @@ bool Grafo::verificaInstalacao(int id){
     if(id == -1)
         return true;
     if(cidades[id].isInstalada()){
-        cout << "A cidade já tem instalação" << endl;
+        cout << endl << "A cidade já tem instalação" << endl;
         return true; 
     }
     return false; 
@@ -214,7 +228,7 @@ void Grafo::inverterStatus(string nome) {
             break;
         }
     }
-    cout << cidade->getNome() << " agora ";
+    cout << endl << cidade->getNome() << " agora ";
     if(cidade->isInstalada())
         cout << "possui instalação." << endl;
     else

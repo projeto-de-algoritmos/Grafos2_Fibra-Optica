@@ -18,7 +18,8 @@ public:
     void menuInstalacao();
     void custoTotal();
     void custoUnico();
-    bool verificaCidade(string nome); 
+    bool verificaCidade(string nome);
+    void alterarCusto();
 };
 
 #endif

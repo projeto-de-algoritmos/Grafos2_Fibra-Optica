@@ -128,7 +128,7 @@ void InterfacePrincipal::desconectarCidades() {
 }
 
 void InterfacePrincipal::menuAnalise() {
-    if(grafo.getTamanho() == 0) {
+    if(grafo.getTamanho() < 2) {
         cout << "É necessário cadastrar no mínimo duas cidades" << endl;
         return;
     }
@@ -151,7 +151,8 @@ void InterfacePrincipal::menuAnalise() {
 }
 
 void InterfacePrincipal::custoTotal() {
-    int total = grafo.prim();
+    string nome = getString("Nome da cidade inicial: ");
+    int total = grafo.prim(nome);
     cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
 }
 

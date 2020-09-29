@@ -67,7 +67,7 @@ void Grafo::desconectar(string nome1, string nome2) {
 }
 
 int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
-    int minimo = INT_MAX, posicao;
+    int minimo = INT_MAX, posicao = -1;
     for(int i = 0; i < custos.size(); i++) {
         if(!visitados[i] && custos[i] < minimo) {
             minimo = custos[i];
@@ -91,15 +91,18 @@ int Grafo::buscarCidade(string nome){
     return id;
 }
 
-int Grafo::prim() {
+int Grafo::prim(string nome) {
+    int verticeInicial = buscarCidade(nome);
     vector <int> predecessores(cidades.size(), -1), custos(cidades.size(), INT_MAX), distancias;
     vector <bool> visitados(cidades.size(), false);
     vector<vector<string>> vertices;
-    int total = 0;
-    custos[0] = 0;
-    predecessores[0] = -1;
+    int total = 0, u = verticeInicial;
+    custos[verticeInicial] = 0;
     for(int i = 0; i < cidades.size(); i++) {
-        int u = custoMinimo(custos, visitados);
+        if(i > 0)
+            u = custoMinimo(custos, visitados);
+        if(u == -1)
+            break;
         visitados[u] = true;
         for(Aresta aresta: cidades[u].getArestas()) {
             if(!visitados[aresta.destino] && aresta.peso < custos[aresta.destino]) {

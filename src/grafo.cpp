@@ -47,13 +47,20 @@ void Grafo::conectar(string a, string b, int custo) {
         if(cidadeA != -1 && cidadeB != -1)
             break;
     }
+    if(cidadeA == -1 || cidadeB == -1) {
+        cout << endl << "As cidades devem estar cadastradas para conectar" << endl;
+        return;
+    }
     if(!cidades[cidadeA].isVizinho(cidadeB)){
         cidades[cidadeA].novoVizinho(cidadeB, custo);
         cidades[cidadeB].novoVizinho(cidadeA, custo);
         cout << endl << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " é " << custo << " km" << endl;
     }
-    else 
-        cout << "As cidades já estão conectadas" << endl;
+    else {
+        cidades[cidadeA].setCusto(cidadeB, custo);
+        cidades[cidadeB].setCusto(cidadeA, custo);
+        cout << endl << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " foi alterada para " << custo << " km" << endl;
+    }
 }
 
 void Grafo::desconectar(string nome1, string nome2) {

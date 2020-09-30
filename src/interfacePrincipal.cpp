@@ -112,21 +112,16 @@ bool InterfacePrincipal::verificaCidade(string nome){
 void InterfacePrincipal::conectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
-    if(verificaCidade(cidade1) && verificaCidade(cidade2)){
-        if(cidade1 != cidade2) {
-            int custo = 0;
-            while(custo <= 0) {
-                custo = getInput<int>("Distância entre as cidades (km): ");
-                if(custo <= 0)
-                    cout << "Custo inválido" << endl;
-            }
-            grafo.conectar(cidade1, cidade2, custo);
+    if(cidade1 != cidade2) {
+        int custo = 0;
+        while(custo <= 0) {
+            custo = getInput<int>("Distância entre as cidades (km): ");
+            if(custo <= 0)
+                cout << "Custo inválido" << endl;
         }
-        else
-            cout << "Não pode conectar a mesma cidade" << endl;
-    }
-    else 
-        cout << endl << "Pelo menos uma das cidades ainda não foi cadastrada. Cadastre-a e tente novamente!" << endl; 
+        grafo.conectar(cidade1, cidade2, custo);
+    } else
+        cout << "Não pode conectar a mesma cidade" << endl;
 }
 
 void InterfacePrincipal::desconectarCidades() {

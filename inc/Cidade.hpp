@@ -27,6 +27,7 @@ public:
     void deletaVizinho(int vizinhoId);
     bool isVizinho(int id);
     bool temVizinho();
+    void setCusto(int cidade, int custo);
 };
 
 #endif

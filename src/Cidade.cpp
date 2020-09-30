@@ -63,3 +63,13 @@ bool Cidade::temVizinho() {
     else
         return false;
 }
+
+void Cidade::setCusto(int cidade, int custo) {
+    int tamanho = vizinhos.size();
+    for(int i = 0; i < tamanho; i++) {
+        if(vizinhos[i].destino == cidade) {
+            vizinhos[i].peso = custo;
+            return;
+        }
+    }
+}

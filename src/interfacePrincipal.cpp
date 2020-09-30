@@ -8,7 +8,12 @@ using namespace std;
 string getString(string mensagem) {
     string entrada;
     cout << mensagem;
-    getline(cin, entrada);
+    while(true){
+        getline(cin, entrada);
+        if(entrada[0] == ' ')
+            cout << "Entrada inválida"; 
+        else break; 
+    }
     return entrada;
 }
 
@@ -121,7 +126,7 @@ void InterfacePrincipal::conectarCidades() {
         }
         grafo.conectar(cidade1, cidade2, custo);
     } else
-        cout << "Não pode conectar a mesma cidade" << endl;
+     cout << "Não pode conectar a mesma cidade" << endl;
 }
 
 void InterfacePrincipal::desconectarCidades() {

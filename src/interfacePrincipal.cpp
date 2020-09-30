@@ -118,9 +118,9 @@ void InterfacePrincipal::conectarCidades() {
     string cidade1 = getString("Nome da cidade 1: ");
     string cidade2 = getString("Nome da cidade 2: ");
     if(cidade1 != cidade2) {
-        int custo = 0;
+        double custo = 0;
         while(custo <= 0) {
-            custo = getInput<int>("Distância entre as cidades (km): ");
+            custo = getInput<double>("Distância entre as cidades (km): ");
             if(custo <= 0)
                 cout << "Custo inválido" << endl;
         }

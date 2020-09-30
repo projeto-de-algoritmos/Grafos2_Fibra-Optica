@@ -1,6 +1,7 @@
 #include "grafo.hpp"
 
 #include <limits.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ void Grafo::reset() {
     cidades.clear();
 }
 
-void Grafo::conectar(string a, string b, int custo) {
+void Grafo::conectar(string a, string b, double custo) {
     int cidadeA = -1, cidadeB = -1, tamanho = cidades.size();
     for(int i = 0; i < tamanho; i++) {
         if(cidades[i].getNome() == a)
@@ -180,7 +181,7 @@ int Grafo::dijkstra(int id1){
         });
     }
     if(cidadeProxima != -1){
-        cout << endl << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+        cout << endl << fixed << setprecision(2) << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
         cout << "Cidade mais próxima: " << cidades[cidadeProxima].getNome() << endl;
         return distancias[cidadeProxima].valor; 
     }

@@ -12,7 +12,7 @@ class Grafo {
 private:
     vector <Cidade> cidades;
 public:
-    void conectar(string a, string b, int custo);
+    void conectar(string a, string b, double custo);
     void novoVertice(string nome, bool instalada);
     void imprimirCidades();
     int buscarCidade(string nome); 

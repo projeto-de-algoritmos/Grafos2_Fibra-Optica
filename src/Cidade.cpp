@@ -24,7 +24,7 @@ vector <Aresta> Cidade::getArestas() {
     return vizinhos;
 }
 
-void Cidade::novoVizinho(int id, int peso) {
+void Cidade::novoVizinho(int id, double peso) {
     Aresta aresta;
     aresta.destino = id;
     aresta.peso = peso;

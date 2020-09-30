@@ -21,7 +21,7 @@ public:
     string getNome();
     void imprimeDados();
     vector <Aresta> getArestas();
-    void novoVizinho(int id, int peso);
+    void novoVizinho(int id, double peso);
     bool isInstalada();
     void setInstalada(bool instalada);
     void deletaVizinho(int vizinhoId);

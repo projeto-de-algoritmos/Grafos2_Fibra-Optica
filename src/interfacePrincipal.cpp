@@ -1,18 +1,18 @@
 #include "interfacePrincipal.hpp"
 
-#include <iostream>
 #include <iomanip>
 
 using namespace std;
 
 string getString(string mensagem) {
     string entrada;
-    cout << mensagem;
-    while(true){
+    while(true) {
+        cout << mensagem;
         getline(cin, entrada);
-        if(entrada[0] == ' ')
-            cout << "Entrada inválida"; 
-        else break; 
+        if(entrada.empty())
+            cout << "Entrada inválida" << endl; 
+        else
+            break; 
     }
     return entrada;
 }
@@ -37,6 +37,7 @@ T getInput(string mensagem) {
 
 InterfacePrincipal::InterfacePrincipal() {
     custoFibra = 500;
+    cout << fixed << setprecision(2);
 }
 
 void InterfacePrincipal::menuPrincipal() {
@@ -74,16 +75,21 @@ void InterfacePrincipal::menuCidades() {
             desconectarCidades();
         else if(opcao == 4)
             grafo.imprimirCidades();
-        else if(opcao == 5) {
-            string nome = getString("Nome de cidade: ");
-            if(verificaCidade(nome))
-                grafo.inverterStatus(nome);
-        } else if(opcao == 6) {
+        else if(opcao == 5)
+            menuInstalacao();
+        else if(opcao == 6)
             grafo.reset();
-            cout << endl << "Todas as cidades foram excluídas." << endl;
-        } else
+        else
             return;
     }
+}
+
+void InterfacePrincipal::menuInstalacao() {
+    string nome = getString("Nome de cidade: ");
+    if(verificaCidade(nome))
+        grafo.inverterStatus(nome);
+    else
+        cout << endl << "Cidade não encontrada" << endl;
 }
 
 void InterfacePrincipal::cadastroCidade() {
@@ -144,7 +150,7 @@ void InterfacePrincipal::menuAnalise() {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
         cout << "(2) Calcular custo para uma instalação" << endl; //Dijkstra
-        cout << fixed << setprecision(2) << "(3) Alterar custo da fibra óptica (Atual: R$ " << custoFibra << ")" << endl;
+        cout << "(3) Alterar custo da fibra óptica (Atual: R$ " << custoFibra << ")" << endl;
         cout << "(0) Voltar" << endl;
         int opcao = getInput<int>("");
         if(opcao == 1)
@@ -160,12 +166,13 @@ void InterfacePrincipal::menuAnalise() {
 
 void InterfacePrincipal::alterarCusto() {
     custoFibra = 0;
+    cout << endl;
     while(custoFibra <= 0) {
         custoFibra = getInput<double>("Custo da fibra óptica por km: ");
         if(custoFibra <= 0)
             cout << "Valor inválido" << endl;
     }
-    cout << fixed << setprecision(2) << "o custo do km da fibra óptica agora é R$ " << custoFibra << endl;
+    cout << "O custo do km da fibra óptica agora é R$ " << custoFibra << endl;
 }
 
 void InterfacePrincipal::custoTotal() {
@@ -176,7 +183,7 @@ void InterfacePrincipal::custoTotal() {
     else if(total == 0)
         cout << endl << "A cidade deve existir" << endl;
     else
-        cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
+        cout << "Custo total: R$" << total * custoFibra << endl;
 }
 
 void InterfacePrincipal::custoUnico(){
@@ -184,10 +191,10 @@ void InterfacePrincipal::custoUnico(){
     if(verificaCidade(cidade)){
         double menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
         if(menorDist != -1)
-            cout << fixed << setprecision(2) << "Custo de instalação: R$" << menorDist * custoFibra << endl;
+            cout << "Custo de instalação: R$" << menorDist * custoFibra << endl;
         else 
             cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
     }
     else
-        cout << endl << "Cidade não encontrada" << endl;
+        cout << "Cidade não encontrada" << endl;
 }

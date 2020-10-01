@@ -4,7 +4,6 @@
 #include "Estruturas.hpp"
 
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -14,20 +13,20 @@ private:
     int id;
     string nome;
     vector <Aresta> vizinhos;
-    bool instalada; 
-public: 
+    bool instalada;
+public:
     Cidade(int id, string nome, bool instalada);
     int getId();
     string getNome();
-    void imprimeDados();
-    vector <Aresta> getArestas();
     void novoVizinho(int id, double peso);
     bool isInstalada();
     void setInstalada(bool instalada);
     void deletaVizinho(int vizinhoId);
     bool isVizinho(int id);
     bool temVizinho();
-    void setCusto(int cidade, int custo);
+    void setCusto(int cidade, double custo);
+    void imprimirArestas();
+    vector <Aresta> getArestas();
 };
 
 #endif

@@ -11,7 +11,6 @@ void Grafo::novoVertice(string nome, bool instalada) {
 }
 
 void Grafo::imprimirCidades() {
-    cout << endl;
     for(Cidade c: cidades) {
         cout << c.getNome();
         if(c.isInstalada())
@@ -23,7 +22,7 @@ void Grafo::imprimirCidades() {
         cout << endl;
     }
     if(cidades.empty())
-        cout << "Não há cidades cadastradas." << endl;
+        cout << "Não há cidades cadastradas." << endl << endl;
 }
 
 bool Grafo::temConexao() {
@@ -37,7 +36,7 @@ bool Grafo::temConexao() {
 
 void Grafo::reset() {
     cidades.clear();
-    cout << endl << "Todas as cidades foram excluídas." << endl;
+    cout << "Todas as cidades foram excluídas." << endl << endl;
 }
 
 void Grafo::conectar(string a, string b, double custo) {
@@ -51,19 +50,20 @@ void Grafo::conectar(string a, string b, double custo) {
             break;
     }
     if(cidadeA == -1 || cidadeB == -1) {
-        cout << endl << "As cidades devem estar cadastradas para conectar" << endl;
+        cout << "As cidades devem estar cadastradas para conectar" << endl << endl;
         return;
     }
     if(!cidades[cidadeA].isVizinho(cidadeB)){
         cidades[cidadeA].novoVizinho(cidadeB, custo);
         cidades[cidadeB].novoVizinho(cidadeA, custo);
-        cout << endl << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " é " << custo << " km" << endl;
+        cout << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " é " << custo << " km" << endl;
     }
     else {
         cidades[cidadeA].setCusto(cidadeB, custo);
         cidades[cidadeB].setCusto(cidadeA, custo);
-        cout << endl << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " foi alterada para " << custo << " km" << endl;
+        cout << "A distância entre " << cidades[cidadeA].getNome() << " e " << cidades[cidadeB].getNome() << " foi alterada para " << custo << " km" << endl;
     }
+    cout << endl;
 }
 
 void Grafo::desconectar(string nome1, string nome2) {
@@ -76,10 +76,9 @@ void Grafo::desconectar(string nome1, string nome2) {
         if(id1 != -1 && id2 != -1)
             break;
     }
-    cout << endl;
     if(id1 != -1 && id2 != -1) {
         if(!cidades[id1].isVizinho(id2)) {
-            cout << "As cidades não estão conectadas" << endl;
+            cout << "As cidades não estão conectadas" << endl << endl;
             return;
         }
         cidades[id1].deletaVizinho(id2);
@@ -87,6 +86,7 @@ void Grafo::desconectar(string nome1, string nome2) {
         cout << nome1 << " e " << nome2 << " foram desconectadas" << endl;
     } else
         cout << "As cidades devem existir e estarem conectadas" << endl;
+    cout << endl;
 }
 
 int Grafo::custoMinimo(vector <double> &custos, vector <bool> &visitados) {
@@ -146,7 +146,7 @@ double Grafo::prim(string nome) {
         }
     }
     tamanho = vertices.size();
-    cout << endl;
+    cout << "Lista de conexões: " << endl;
     for(int i = 0; i < tamanho; i++)
         cout << vertices[i][0] << " - " << vertices[i][1] << "   " << distancias[i] << " km" << endl;
     cout << endl << total << " km de fibra óptica serão necessários." << endl;
@@ -185,7 +185,6 @@ double Grafo::dijkstra(int id1){
         sort(listaPrioridades.begin(), listaPrioridades.end(), [](Distancia a, Distancia b){return (a.valor < b.valor); 
         });
     }
-    cout << endl;
     if(cidadeProxima != -1){
         cout << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
         cout << "Cidade mais próxima: " << cidades[cidadeProxima].getNome() << endl;
@@ -218,7 +217,7 @@ bool Grafo::verificaInstalacao(int id){
     if(id == -1)
         return true;
     if(cidades[id].isInstalada()){
-        cout << endl << "A cidade já tem instalação" << endl;
+        cout << "A cidade já tem instalação" << endl;
         return true; 
     }
     return false; 
@@ -242,9 +241,10 @@ void Grafo::inverterStatus(string nome) {
             break;
         }
     }
-    cout << endl << cidade->getNome() << " agora ";
+    cout << cidade->getNome() << " agora ";
     if(cidade->isInstalada())
         cout << "possui instalação." << endl;
     else
         cout << "não possui instalação." << endl;
+    cout << endl;
 }

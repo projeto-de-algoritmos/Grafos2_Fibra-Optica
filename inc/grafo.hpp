@@ -2,11 +2,6 @@
 #define GRAFO_HPP
 
 #include "Cidade.hpp"
-#include "Estruturas.hpp"
-
-#include <iostream>
-#include <vector>
-#include <algorithm>
 
 class Grafo {
 private:
@@ -15,14 +10,13 @@ public:
     void conectar(string a, string b, double custo);
     void novoVertice(string nome, bool instalada);
     void imprimirCidades();
-    int buscarCidade(string nome); 
+    int buscarCidade(string nome);
     int prim(string nome);
-    int dijkstra(int id1); 
+    int dijkstra(int id1);
     bool verificaInstalacao(int id);
-    Distancia criarDistancia(int id); 
+    Distancia criarDistancia(int id);
     int verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp);
-    int custoMinimo(vector <int> &custos, vector <bool> &visitados);
-    void copiarGrafo(Grafo &grafo);
+    int custoMinimo(vector <double> &custos, vector <bool> &visitados);
     void reset();
     bool temConexao();
     void inverterStatus(string nome);

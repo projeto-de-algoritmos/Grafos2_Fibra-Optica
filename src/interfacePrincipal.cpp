@@ -1,18 +1,18 @@
 #include "interfacePrincipal.hpp"
 
-#include <iostream>
 #include <iomanip>
 
 using namespace std;
 
 string getString(string mensagem) {
     string entrada;
-    cout << mensagem;
-    while(true){
+    while(true) {
+        cout << mensagem;
         getline(cin, entrada);
-        if(entrada[0] == ' ')
-            cout << "Entrada inválida"; 
-        else break; 
+        if(entrada.empty())
+            cout << "Entrada inválida" << endl; 
+        else
+            break; 
     }
     return entrada;
 }
@@ -74,16 +74,21 @@ void InterfacePrincipal::menuCidades() {
             desconectarCidades();
         else if(opcao == 4)
             grafo.imprimirCidades();
-        else if(opcao == 5) {
-            string nome = getString("Nome de cidade: ");
-            if(verificaCidade(nome))
-                grafo.inverterStatus(nome);
-        } else if(opcao == 6) {
+        else if(opcao == 5)
+            menuInstalacao();
+        else if(opcao == 6)
             grafo.reset();
-            cout << endl << "Todas as cidades foram excluídas." << endl;
-        } else
+        else
             return;
     }
+}
+
+void InterfacePrincipal::menuInstalacao() {
+    string nome = getString("Nome de cidade: ");
+    if(verificaCidade(nome))
+        grafo.inverterStatus(nome);
+    else
+        cout << endl << "Cidade não encontrada" << endl;
 }
 
 void InterfacePrincipal::cadastroCidade() {
@@ -186,7 +191,7 @@ void InterfacePrincipal::custoUnico(){
         if(menorDist != -1)
             cout << fixed << setprecision(2) << "Custo de instalação: R$" << menorDist * custoFibra << endl;
         else 
-            cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
+            cout << endl << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
     }
     else
         cout << endl << "Cidade não encontrada" << endl;

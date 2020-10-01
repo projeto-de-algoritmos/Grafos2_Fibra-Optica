@@ -10,18 +10,8 @@ int Cidade::getId() {
     return id;
 }
 
-
-void Cidade::imprimeDados(){
-    cout << nome << endl;
-
-}
-
 string Cidade::getNome() {
     return nome;
-}
-
-vector <Aresta> Cidade::getArestas() {
-    return vizinhos;
 }
 
 void Cidade::novoVizinho(int id, double peso) {
@@ -49,7 +39,7 @@ void Cidade::deletaVizinho(int vizinhoId) {
     }
 }
 
-bool Cidade::isVizinho(int id){
+bool Cidade::isVizinho(int id) {
     for(Aresta a: vizinhos){
         if(a.destino == id) 
             return true;
@@ -64,7 +54,7 @@ bool Cidade::temVizinho() {
         return false;
 }
 
-void Cidade::setCusto(int cidade, int custo) {
+void Cidade::setCusto(int cidade, double custo) {
     int tamanho = vizinhos.size();
     for(int i = 0; i < tamanho; i++) {
         if(vizinhos[i].destino == cidade) {
@@ -72,4 +62,8 @@ void Cidade::setCusto(int cidade, int custo) {
             return;
         }
     }
+}
+
+vector <Aresta> Cidade::getArestas() {
+    return vizinhos;
 }

@@ -1,7 +1,8 @@
 #include "grafo.hpp"
 
-#include <limits.h>
+#include <cmath>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -36,6 +37,7 @@ bool Grafo::temConexao() {
 
 void Grafo::reset() {
     cidades.clear();
+    cout << endl << "Todas as cidades foram excluídas." << endl;
 }
 
 void Grafo::conectar(string a, string b, double custo) {
@@ -74,7 +76,12 @@ void Grafo::desconectar(string nome1, string nome2) {
         if(id1 != -1 && id2 != -1)
             break;
     }
+    cout << endl;
     if(id1 != -1 && id2 != -1) {
+        if(!cidades[id1].isVizinho(id2)) {
+            cout << "As cidades não estão conectadas" << endl;
+            return;
+        }
         cidades[id1].deletaVizinho(id2);
         cidades[id2].deletaVizinho(id1);
         cout << nome1 << " e " << nome2 << " foram desconectadas" << endl;
@@ -82,8 +89,8 @@ void Grafo::desconectar(string nome1, string nome2) {
         cout << "As cidades devem existir e estarem conectadas" << endl;
 }
 
-int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
-    int minimo = INT_MAX, posicao = -1, tamanho = custos.size();
+int Grafo::custoMinimo(vector <double> &custos, vector <bool> &visitados) {
+    double minimo = INFINITY, posicao = -1, tamanho = custos.size();
     for(int i = 0; i < tamanho; i++) {
         if(!visitados[i] && custos[i] < minimo) {
             minimo = custos[i];
@@ -91,11 +98,6 @@ int Grafo::custoMinimo(vector <int> &custos, vector <bool> &visitados) {
         }
     }
     return posicao;
-}
-
-void Grafo::copiarGrafo(Grafo &grafo) {
-    for(Cidade cidade: cidades)
-        grafo.novoVertice(cidade.getNome(), cidade.isInstalada());
 }
 
 int Grafo::buscarCidade(string nome){
@@ -108,15 +110,16 @@ int Grafo::buscarCidade(string nome){
 }
 
 int Grafo::prim(string nome) {
-    int verticeInicial = buscarCidade(nome);
-    if(!cidades[verticeInicial].temVizinho()) {
+    int u = buscarCidade(nome), total = 0;
+    if(u == -1)
+        return 0;
+    if(!cidades[u].temVizinho())
         return -1;
-    }
-    vector <int> predecessores(cidades.size(), -1), custos(cidades.size(), INT_MAX), distancias;
+    vector <int> predecessores(cidades.size(), -1);
+    vector<double> custos(cidades.size(), INFINITY), distancias;
     vector <bool> visitados(cidades.size(), false);
     vector<vector<string>> vertices;
-    int total = 0, u = verticeInicial;
-    custos[verticeInicial] = 0;
+    custos[u] = 0;
     int tamanho = cidades.size();
     for(int i = 0; i < tamanho; i++) {
         if(i > 0)
@@ -181,7 +184,7 @@ int Grafo::dijkstra(int id1){
         });
     }
     if(cidadeProxima != -1){
-        cout << endl << fixed << setprecision(2) << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+        cout << endl << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
         cout << "Cidade mais próxima: " << cidades[cidadeProxima].getNome() << endl;
         return distancias[cidadeProxima].valor; 
     }
@@ -191,22 +194,22 @@ int Grafo::dijkstra(int id1){
 
 
 int Grafo::verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp){
-            int achou = -1;
-            int pos = -1;
-            if(distancias[temp.destino].valor != -1)
-                return -2;
-            for(Distancia d:lista){
-                pos++; 
-                if(d.destino == temp.destino){
-                    if(d.valor > temp.valor)
-                        achou = pos; 
-                    else
-                        achou = -2;
-                    break; 
-                }
-            }
-            return achou; 
+    int achou = -1;
+    int pos = -1;
+    if(distancias[temp.destino].valor != -1)
+        return -2;
+    for(Distancia d:lista){
+        pos++; 
+        if(d.destino == temp.destino){
+            if(d.valor > temp.valor)
+                achou = pos; 
+            else
+                achou = -2;
+            break; 
         }
+    }
+    return achou; 
+}
 
 bool Grafo::verificaInstalacao(int id){
     if(id == -1)

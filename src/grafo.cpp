@@ -183,8 +183,9 @@ int Grafo::dijkstra(int id1){
         sort(listaPrioridades.begin(), listaPrioridades.end(), [](Distancia a, Distancia b){return (a.valor < b.valor); 
         });
     }
+    cout << endl;
     if(cidadeProxima != -1){
-        cout << endl << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
+        cout << "A distância para a cidade mais próxima com instalação é de " << distancias[cidadeProxima].valor << " km" << endl;
         cout << "Cidade mais próxima: " << cidades[cidadeProxima].getNome() << endl;
         return distancias[cidadeProxima].valor; 
     }

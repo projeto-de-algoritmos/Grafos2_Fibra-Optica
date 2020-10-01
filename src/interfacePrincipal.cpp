@@ -37,6 +37,7 @@ T getInput(string mensagem) {
 
 InterfacePrincipal::InterfacePrincipal() {
     custoFibra = 500;
+    cout << fixed << setprecision(2);
 }
 
 void InterfacePrincipal::menuPrincipal() {
@@ -149,7 +150,7 @@ void InterfacePrincipal::menuAnalise() {
         cout << endl;
         cout << "(1) Calcular custo total para instalação" << endl; //MST
         cout << "(2) Calcular custo para uma instalação" << endl; //Dijkstra
-        cout << fixed << setprecision(2) << "(3) Alterar custo da fibra óptica (Atual: R$ " << custoFibra << ")" << endl;
+        cout << "(3) Alterar custo da fibra óptica (Atual: R$ " << custoFibra << ")" << endl;
         cout << "(0) Voltar" << endl;
         int opcao = getInput<int>("");
         if(opcao == 1)
@@ -165,12 +166,13 @@ void InterfacePrincipal::menuAnalise() {
 
 void InterfacePrincipal::alterarCusto() {
     custoFibra = 0;
+    cout << endl;
     while(custoFibra <= 0) {
         custoFibra = getInput<double>("Custo da fibra óptica por km: ");
         if(custoFibra <= 0)
             cout << "Valor inválido" << endl;
     }
-    cout << fixed << setprecision(2) << "o custo do km da fibra óptica agora é R$ " << custoFibra << endl;
+    cout << "O custo do km da fibra óptica agora é R$ " << custoFibra << endl;
 }
 
 void InterfacePrincipal::custoTotal() {
@@ -181,18 +183,18 @@ void InterfacePrincipal::custoTotal() {
     else if(total == 0)
         cout << endl << "A cidade deve existir" << endl;
     else
-        cout << fixed << setprecision(2) << "Custo total: R$" << total * custoFibra << endl;
+        cout << "Custo total: R$" << total * custoFibra << endl;
 }
 
 void InterfacePrincipal::custoUnico(){
     string cidade = getString("Nome da cidade: "); 
     if(verificaCidade(cidade)){
-        int menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
+        double menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
         if(menorDist != -1)
-            cout << fixed << setprecision(2) << "Custo de instalação: R$" << menorDist * custoFibra << endl;
+            cout << "Custo de instalação: R$" << menorDist * custoFibra << endl;
         else 
-            cout << endl << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
+            cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
     }
     else
-        cout << endl << "Cidade não encontrada" << endl;
+        cout << "Cidade não encontrada" << endl;
 }

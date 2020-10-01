@@ -182,7 +182,7 @@ void InterfacePrincipal::custoTotal() {
 void InterfacePrincipal::custoUnico(){
     string cidade = getString("Nome da cidade: "); 
     if(verificaCidade(cidade)){
-        int menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
+        double menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
         if(menorDist != -1)
             cout << fixed << setprecision(2) << "Custo de instalação: R$" << menorDist * custoFibra << endl;
         else 

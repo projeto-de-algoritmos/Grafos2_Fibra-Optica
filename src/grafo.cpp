@@ -148,7 +148,7 @@ int Grafo::prim(string nome) {
     return total;
 }
 
-int Grafo::dijkstra(int id1){
+double Grafo::dijkstra(int id1){
     Distancia dist_temp;
     vector <Distancia> distancias(cidades.size());
     vector <Distancia> listaPrioridades;

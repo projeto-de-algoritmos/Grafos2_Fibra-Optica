@@ -17,7 +17,7 @@ public:
     void imprimirCidades();
     int buscarCidade(string nome); 
     int prim(string nome);
-    int dijkstra(int id1); 
+    double dijkstra(int id1); 
     bool verificaInstalacao(int id);
     Distancia criarDistancia(int id); 
     int verificaSub(vector<Distancia> lista, vector <Distancia> distancias, Distancia temp);

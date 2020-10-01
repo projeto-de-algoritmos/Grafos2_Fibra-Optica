@@ -166,18 +166,17 @@ void InterfacePrincipal::menuAnalise() {
 
 void InterfacePrincipal::alterarCusto() {
     custoFibra = 0;
-    cout << endl;
     while(custoFibra <= 0) {
         custoFibra = getInput<double>("Custo da fibra óptica por km: ");
         if(custoFibra <= 0)
             cout << "Valor inválido" << endl;
     }
-    cout << "O custo do km da fibra óptica agora é R$ " << custoFibra << endl;
+    cout << endl << "O custo do km da fibra óptica agora é R$ " << custoFibra << endl;
 }
 
 void InterfacePrincipal::custoTotal() {
     string nome = getString("Nome da cidade inicial: ");
-    int total = grafo.prim(nome);
+    double total = grafo.prim(nome);
     if(total == -1)
         cout << endl << "A cidade precisa estar conectada" << endl;
     else if(total == 0)
@@ -196,5 +195,5 @@ void InterfacePrincipal::custoUnico(){
             cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
     }
     else
-        cout << "Cidade não encontrada" << endl;
+        cout << endl << "Cidade não encontrada" << endl;
 }

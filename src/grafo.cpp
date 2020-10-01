@@ -90,7 +90,8 @@ void Grafo::desconectar(string nome1, string nome2) {
 }
 
 int Grafo::custoMinimo(vector <double> &custos, vector <bool> &visitados) {
-    double minimo = INFINITY, posicao = -1, tamanho = custos.size();
+    double minimo = INFINITY;
+    int posicao = -1, tamanho = custos.size();
     for(int i = 0; i < tamanho; i++) {
         if(!visitados[i] && custos[i] < minimo) {
             minimo = custos[i];
@@ -109,12 +110,13 @@ int Grafo::buscarCidade(string nome){
     return id;
 }
 
-int Grafo::prim(string nome) {
-    int u = buscarCidade(nome), total = 0;
+double Grafo::prim(string nome) {
+    int u = buscarCidade(nome);
     if(u == -1)
         return 0;
     if(!cidades[u].temVizinho())
         return -1;
+    double total = 0;
     vector <int> predecessores(cidades.size(), -1);
     vector<double> custos(cidades.size(), INFINITY), distancias;
     vector <bool> visitados(cidades.size(), false);

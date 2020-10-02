@@ -203,9 +203,9 @@ void InterfacePrincipal::custoUnico(){
     system("clear||cls");
     if(verificaCidade(cidade)){
         double menorDist = grafo.dijkstra(grafo.buscarCidade(cidade));
-        if(menorDist != -1)
+        if(menorDist > -1)
             cout << "Custo de instalação: R$" << menorDist * custoFibra << endl;
-        else 
+        else if(menorDist == -1) 
             cout << "Não foi possível encontrar um caminho para cidades com instalação. Por favor, verifique as conexões da cidade" << endl;
     }
     else

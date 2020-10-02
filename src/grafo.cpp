@@ -159,7 +159,7 @@ double Grafo::dijkstra(int id1){
     vector <Distancia> listaPrioridades;
     int cidadeProxima = -1; 
     if(verificaInstalacao(id1))
-       return -1;
+       return -2;
     dist_temp = criarDistancia(id1); 
     listaPrioridades.push_back(dist_temp);
     while(!listaPrioridades.empty()){

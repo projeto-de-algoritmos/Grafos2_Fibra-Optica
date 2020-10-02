@@ -9,7 +9,7 @@ string getString(string mensagem) {
     while(true) {
         cout << mensagem;
         getline(cin, entrada);
-        if(entrada.empty())
+        if(entrada.empty() || entrada[0] == ' ')
             cout << endl << "Entrada inválida" << endl; 
         else
             break; 
